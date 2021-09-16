@@ -37,5 +37,4 @@ def merge(leftArr,rightArr):
   return ansList
 
 
-newArr = mergeSort(arr)
-print(newArr)
+print(mergeSort(arr))
