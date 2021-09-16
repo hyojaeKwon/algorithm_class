@@ -5,41 +5,37 @@
 arr = [2,5,1,6,4,8,7,9]
 sortedArr = []
 
-def merging(arr,left,mid,right):
-  i = left
-  j = mid+1
-  
-  #Select the small value
-  while((i<=mid) and ( j <= right)):
-    if(arr[i]<=arr[j]):
-      sortedArr.append(arr[i])
-      i+=1
-    else:
-      sortedArr.append(arr[j])
-      j+=1
+def mergeSort(arr):
+  if len(arr) <= 1:
+    return arr
+  left = 0
+  right = len(arr)
+  mid = len(arr) // 2
 
-  if(i>mid):
-    for k in range(j,right):
-      sortedArr.append(arr[k])
-  else:
-    for k in range(i,right):
-      sortedArr.append(arr[k])
-  
-  print(sortedArr,left,right)
-  for k in range(left,right):
-    arr[k] = sortedArr[k]
-      
-def mergeSort(arr,left,right):
-  if(left<right):
-    #Finding the middle site
-    mid = int((left + right)/2)
-    
-    #Dividing the list
-    mergeSort(arr,left,mid)
-    mergeSort(arr,mid+1,right)
-    merging(arr,left,mid,right)
+  leftArr = arr[left:mid]
+  rightArr = arr[mid:] 
+  leftArr = mergeSort(leftArr)
+  rightArr = mergeSort(rightArr)
+  return merge(leftArr,rightArr)
 
 
-mergeSort(arr,0,len(arr)-1)
-print(arr)
-  
+
+def merge(leftArr,rightArr):
+  ansList = []
+  while len(leftArr) > 0 or len(rightArr) > 0:
+    if len(leftArr) > 0 and len(rightArr) > 0:
+      if leftArr[0] < rightArr[0]:
+        ansList.append(leftArr[0])
+      else:
+        ansList.append(rightArr[0])
+    elif len(leftArr) > 0:
+      ansList.append(leftArr[0])
+      leftArr = leftArr[1:]
+    elif len(rightArr) > 0:
+      ansList.append(rightArr[0])
+      rightArr = rightArr[1:]
+  return ansList
+
+
+newArr = mergeSort(arr)
+print(newArr)
