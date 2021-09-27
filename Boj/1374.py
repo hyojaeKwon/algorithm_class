@@ -12,6 +12,8 @@ table.sort(key=lambda x: (x[1], x[2]))
 
 classRoom = 0
 classCount = 0
+
+
 while classCount < n:
     classCount += 1
     table.pop(0)
