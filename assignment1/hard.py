@@ -10,7 +10,6 @@ def matrixSolve(nums):
     length = len(newNums)
     matrix = [[0] * length for _ in range(length)]
 
-
     for i in range(1,length):
         for j in range(1,length - i):
             k = i + j
@@ -21,6 +20,5 @@ def matrixSolve(nums):
 
     print(matrix[1][length - 1])
 
-
-
 matrixSolve(nums)
+print(type(nums))
