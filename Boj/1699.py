@@ -14,4 +14,3 @@ if __name__ == "__main__":
     n = int(Input())
     dp = [i for i in range(n + 1)]
     find(dp,n)
-
