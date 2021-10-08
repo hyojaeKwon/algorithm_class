@@ -16,8 +16,5 @@ for _ in range(t):
         for j in range(coin[i],m+1):
             dp[j] = dp[j-coin[i]] + dp[j]
 
-
+    print(dp)
     print(dp[m])
-
-
-    #굳이 2dim list를 통해서 memorization 할 필요 없음
