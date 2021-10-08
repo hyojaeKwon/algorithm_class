@@ -7,28 +7,17 @@ for _ in range(t):
     coin = list(map(int,Input().split()))
     m = int(Input())
 
-    dp = [[0]*(m+1) for _ in range(n+1)]
-    for i in range(m):
-        dp[0][i] = 1
 
-    print(dp)
+    #여기서 m+1배열을 만드는 이유는, dp[0]을 1로 둠으로써 1번째 row를 계산하기 위함임.
+    dp = [0 for _ in range(m+1)]
+    dp[0] = 1
 
-    for i in range(1,n):
-        print(i)
-        for j in range(1,m):
-            if coin[i-1] > m:
-                dp[i][j] = dp[i-1][j]
-            else:
-                plus = 0
-                for k in range((dp[i][j]+1)//coin[i]):
-                    print(k)
-                    plus += dp[i-1][j-(k*coin[i-1])]
-
-            dp[i][j] += plus
-            print(dp)
+    for i in range(n):
+        for j in range(coin[i],m+1):
+            dp[j] = dp[j-coin[i]] + dp[j]
 
 
+    print(dp[m])
 
-    print(dp[n-1][m-1])
 
-
+    #굳이 2dim list를 통해서 memorization 할 필요 없음
