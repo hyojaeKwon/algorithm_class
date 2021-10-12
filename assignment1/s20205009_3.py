@@ -1,5 +1,4 @@
 
-nums = [3,1,5,8]
 
 def matrixSolve(nums):
     newNums = []
@@ -20,5 +19,3 @@ def matrixSolve(nums):
 
     print(matrix[1][length - 1])
 
-matrixSolve(nums)
-print(type(nums))
