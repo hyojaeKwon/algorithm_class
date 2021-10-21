@@ -15,8 +15,6 @@ for i in range(1,n+1):
     for j in range(1,m+1):
         dp[i][j] = max(dp[i][j-1],money[i][j])
         for k in range(1,i+1):
-                       else:
-                sol[j]
             if dp[i][j] < money[i-k][j] + dp[k][j-1]:
                 dp[i][j] = money[i-k][j] + dp[k][j-1]
 
