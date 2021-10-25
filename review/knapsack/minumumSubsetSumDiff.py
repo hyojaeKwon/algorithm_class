@@ -5,9 +5,15 @@ Input = sys.stdin.readline
 
 inList = list(map(int,Input().split()))
 
-dp = [[0]*(sum(inList)//2+1) for _ in range(len(inList)+1)]
+dp = [[0]*((sum(inList))//2+1) for _ in range(len(inList)+1)]
 
 dp[0][0] = 1
+isOdd = False
+if sum(inList)%2:
+    isOdd = True
+else:
+    isOdd = False
+
 
 for i in range(1,len(inList)+1):
     for j in range(sum(inList)//2+1):
@@ -19,6 +25,11 @@ for i in range(1,len(inList)+1):
             else:
                 dp[i][j] = 0
 
-for i in range(1,sum(inList)//2+1,-1):
-    if dp[-1][i]:
-        print(2*(sum(inList)//2 - i))
+for i in range(sum(inList)//2,1,-1):
+    if dp[len(inList)][i]:
+        if isOdd:
+            print(2*(sum(inList)//2 - i) +1)
+            break
+        else:
+            print(2*(sum(inList)//2 - i))
+            break
