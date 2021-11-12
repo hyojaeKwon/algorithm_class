@@ -17,7 +17,7 @@ def quickSort(list,start,end):
         #key보다 큰 값을 찾는다.
         while (i <= end and list[key] >= list[i]):
             i+=1
-        #key보다 작은 값을 찾는다.
+        #key보다 작은 값을 찾는     다.
         while j > start and list[key] <= list[j]:
             j-=1
 
