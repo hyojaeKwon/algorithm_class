@@ -1,56 +1,54 @@
 import sys
 from collections import deque
 
-Input = sys.stdin.readline
-wordNum = int(Input())
+words = ["xwt","xwf","aw","att","wftt"]
+def LanguageOrder(words):
+    index = 0
+    word ={}
+    wordList2 = []
+    for i in words:
+        wordList2.append(i)
 
-index = 0
-word ={}
-wordList =[]
-wordList2 = []
-cnt = 0
-wordSequence = []
-for i in range(wordNum):
-    wordStr = Input()
-    wordList2.append(wordStr)
-isWord =[]
-isWordCnt = 0
-for i in range(len(wordList2)):
-    for j in range(len(wordList2[i])):
-        if not(wordList2[i][j]) in isWord:
-            isWord.append(wordList2[i][j])
-            isWordCnt+=1
+    cnt = 0
+    wordSequence = []
 
-for i in range(len(wordList2)-1):
-    for j in range(len(wordList2[i])):
-        if wordList2[i][j] == wordList2[i+1][j]:
-            continue
-        else:
-            if wordList2[i+1][j] == '\n':
+    isWord =[]
+    isWordCnt = 0
+    for i in range(len(wordList2)):
+        for j in range(len(wordList2[i])):
+            if not(wordList2[i][j]) in isWord:
+                isWord.append(wordList2[i][j])
+                isWordCnt+=1
+
+    for i in range(len(wordList2)-1):
+        for j in range(len(wordList2[i])):
+            if wordList2[i][j] == wordList2[i+1][j]:
+                continue
+            else:
+                if wordList2[i+1][j] == '\n' or wordList2[i][j] == '\n':
+                    break
+                if not (wordList2[i][j] in word):
+                    word[wordList2[i][j]] = index
+                    index += 1
+                    cnt += 1
+                if not (wordList2[i+1][j] in word):
+                    word[wordList2[i+1][j]] = index
+                    index += 1
+                    cnt += 1
+                if not ([wordList2[i][j], wordList2[i + 1][j]] in wordSequence):
+                    wordSequence.append([wordList2[i][j], wordList2[i + 1][j]])
                 break
-            if not (wordList2[i][j] in word):
-                word[wordList2[i][j]] = index
-                index += 1
-                cnt += 1
-            if not (wordList2[i+1][j] in word):
-                word[wordList2[i+1][j]] = index
-                index += 1
-                cnt += 1
-            if not ([wordList2[i][j], wordList2[i + 1][j]] in wordSequence):
-                wordSequence.append([wordList2[i][j], wordList2[i + 1][j]])
-            break
 
 
 
 
-graph = [[] for _ in range(cnt)]
-inDegree = [0]*cnt
-#글자들을 등록한다.
-for i in wordSequence:
-    inDegree[word[i[1]]] += 1
+    graph = [[] for _ in range(cnt)]
+    inDegree = [0]*cnt
+    #글자들을 등록한다.
+    for i in wordSequence:
+        inDegree[word[i[1]]] += 1
 
 
-def topology_soty():
     result = []
     q = deque()
 
@@ -71,6 +69,18 @@ def topology_soty():
                 if not inDegree[word[i[1]]]:
                     q.append(word[i[1]])
 
-    ans = ''.join(result)
-    return ans
-print(topology_soty())
+    isRight = True
+    for i in inDegree:
+        if i != 0:
+            isRight = False
+    if not isRight:
+        return ""
+    else:
+        if len(result) < isWordCnt-1:
+            for i in isWord:
+                if i != '\n' and not (i in result):
+
+                    result.append(i)
+        ans = ''.join(result)
+        return ans
+print(LanguageOrder(words))
