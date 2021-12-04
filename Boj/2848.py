@@ -13,21 +13,21 @@ wordSequence = []
 for i in range(wordNum):
     wordStr = Input()
     wordList2.append(wordStr)
+isWord =[]
+isWordCnt = 0
+for i in range(len(wordList2)):
+    for j in range(len(wordList2[i])):
+        if not(wordList2[i][j]) in isWord:
+            isWord.append(wordList2[i][j])
+            isWordCnt+=1
 
 for i in range(len(wordList2)-1):
     for j in range(len(wordList2[i])):
         if wordList2[i][j] == wordList2[i+1][j]:
-            if not (wordList2[i][j+1] in word):
-                word[wordList2[i][j+1]] = index
-                index += 1
-                cnt += 1
-            if not (wordList2[i+1][j+1] in word):
-                word[wordList2[i+1][j+1]] = index
-                index += 1
-                cnt += 1
-            if not ([wordList2[i][j+1],wordList2[i+1][j+1]] in wordSequence):
-                wordSequence.append([wordList2[i][j+1],wordList2[i+1][j+1]])
+            continue
         else:
+            if wordList2[i+1][j] == '\n':
+                break
             if not (wordList2[i][j] in word):
                 word[wordList2[i][j]] = index
                 index += 1
@@ -41,7 +41,7 @@ for i in range(len(wordList2)-1):
             break
 
 
-print(wordSequence)
+
 
 graph = [[] for _ in range(cnt)]
 inDegree = [0]*cnt
@@ -71,8 +71,6 @@ def topology_soty():
                 if not inDegree[word[i[1]]]:
                     q.append(word[i[1]])
 
-    if len(result) == 0:
-        print("!")
-    print(''.join(result))
-
-topology_soty()
+    ans = ''.join(result)
+    return ans
+print(topology_soty())
