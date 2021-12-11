@@ -1,8 +1,14 @@
 import sys
-from collections import deque
+Input = sys.stdin.readline
 
-words = ["xwt","xwf","aw","att","wftt"]
+num = int(Input())
+words = []
+for i in range(num):
+    wordList = Input()
+    words.append(wordList)
+
 def LanguageOrder(words):
+    from collections import deque
     index = 0
     word ={}
     wordList2 = []
@@ -25,8 +31,10 @@ def LanguageOrder(words):
             if wordList2[i][j] == wordList2[i+1][j]:
                 continue
             else:
-                if wordList2[i+1][j] == '\n' or wordList2[i][j] == '\n':
+                if wordList2[i][j] == '\n':
                     break
+                if wordList2[i+1][j] == '\n':
+                    return "!"
                 if not (wordList2[i][j] in word):
                     word[wordList2[i][j]] = index
                     index += 1
@@ -39,8 +47,15 @@ def LanguageOrder(words):
                     wordSequence.append([wordList2[i][j], wordList2[i + 1][j]])
                 break
 
-
-
+    #
+    # print(word)
+    # print(index)
+    # print(isWord)
+    if len(isWord) == 2:
+        if isWord[0] == '\n':
+            return isWord[1]
+        else:
+            return isWord[0]
 
     graph = [[] for _ in range(cnt)]
     inDegree = [0]*cnt
@@ -57,6 +72,8 @@ def LanguageOrder(words):
             q.append(i)
 
     while q:
+        if len(q)>=2:
+            return"?"
         now = q.popleft()
         w = {v:k for k,v in word.items()}
         nw = w.get(now)
@@ -74,13 +91,15 @@ def LanguageOrder(words):
         if i != 0:
             isRight = False
     if not isRight:
-        return ""
+        return "!"
     else:
         if len(result) < isWordCnt-1:
             for i in isWord:
                 if i != '\n' and not (i in result):
 
-                    result.append(i)
+                    return "?"
         ans = ''.join(result)
+        # print(result)
         return ans
+
 print(LanguageOrder(words))
